@@ -15,6 +15,10 @@
     {
       "target_name": "factory",
       "sources": [ "factory.cc" ]
+    },
+    {
+      "target_name": "funfac",
+      "sources": [ "funfac.cc" ]
     }
   ]
 }
