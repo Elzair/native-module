@@ -19,6 +19,10 @@
     {
       "target_name": "funfac",
       "sources": [ "funfac.cc" ]
+    },
+    {
+      "target_name": "objfac",
+      "sources": [ "objfac.cc", "myobj.cc" ]
     }
   ]
 }
