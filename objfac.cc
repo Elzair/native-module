@@ -3,8 +3,16 @@
 
 using namespace v8;
 
-void InitAll(Handle<Object> exports) {
-  MyObject::Init(exports);
+Handle<Value> CreateObject(const Arguments& args) {
+  HandleScope scope;
+  return scope.Close(MyObject::NewInstance(args));
+}
+
+void InitAll(Handle<Object> exports, Handle<Object> module) {
+  //MyObject::Init(exports);
+  MyObject::Init();
+  module->Set(String::NewSymbol("exports"),
+      FunctionTemplate::New(CreateObject)->GetFunction());
 }
 
 NODE_MODULE(objfac, InitAll)

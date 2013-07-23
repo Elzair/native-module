@@ -15,7 +15,17 @@ console.log(obj1.msg + ' '+obj2.msg);
 var fn = funfac();
 console.log(fn());
 
-var obj = new objfac.MyObject(10);
-console.log(obj.plusOne());
-console.log(obj.plusOne());
-console.log(obj.plusOne());
+//var obj = new objfac.MyObject(10);
+//console.log(obj.plusOne());
+//console.log(obj.plusOne());
+//console.log(obj.plusOne());
+
+var obja = objfac(10);
+console.log(obja.plusOne());
+console.log(obja.plusOne());
+console.log(obja.plusOne());
+
+var objb = objfac(20);
+console.log(objb.plusOne());
+console.log(objb.plusOne());
+console.log(objb.plusOne());
