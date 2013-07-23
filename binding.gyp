@@ -11,6 +11,10 @@
     {
       "target_name": "callbacks",
       "sources": [ "callbacks.cc" ]
+    },
+    {
+      "target_name": "factory",
+      "sources": [ "factory.cc" ]
     }
   ]
 }
