@@ -14,8 +14,8 @@ void MyObject::Init() {
   tpl->SetClassName(String::NewSymbol("MyObject"));
   tpl->InstanceTemplate()->SetInternalFieldCount(1);
   // Prototype
-  tpl->PrototypeTemplate()->Set(String::NewSymbol("plusOne"),
-      FunctionTemplate::New(PlusOne)->GetFunction());
+  //tpl->PrototypeTemplate()->Set(String::NewSymbol("plusOne"),
+  //    FunctionTemplate::New(PlusOne)->GetFunction());
 
   /*Persistent<Function>*/ 
   constructor = Persistent<Function>::New(tpl->GetFunction());
@@ -26,7 +26,7 @@ Handle<Value> MyObject::New(const Arguments& args) {
   HandleScope scope;
 
   MyObject *obj = new MyObject();
-  obj->counter_ = args[0]->IsUndefined() ? 0 : args[0]->NumberValue();
+  obj->val_ = args[0]->IsUndefined() ? 0 : args[0]->NumberValue();
   obj->Wrap(args.This());
 
   return args.This();
