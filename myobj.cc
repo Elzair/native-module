@@ -42,11 +42,11 @@ Handle<Value> MyObject::NewInstance(const Arguments& args) {
   return scope.Close(instance);
 }
 
-Handle<Value> MyObject::PlusOne(const Arguments& args) {
-  HandleScope scope;
-
-  MyObject *obj = ObjectWrap::Unwrap<MyObject>(args.This());
-  obj->counter_ += 1;
-
-  return scope.Close(Number::New(obj->counter_));
-}
+//Handle<Value> MyObject::PlusOne(const Arguments& args) {
+//  HandleScope scope;
+//
+//  MyObject *obj = ObjectWrap::Unwrap<MyObject>(args.This());
+//  obj->counter_ += 1;
+//
+//  return scope.Close(Number::New(obj->counter_));
+//}

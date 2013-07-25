@@ -36,5 +36,4 @@ console.log(fn());
 var obja = objfac.createObject(10);
 var objb = objfac.createObject(20);
 var result = objfac.add(obja, objb);
-
 console.log(result);
