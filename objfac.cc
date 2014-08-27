@@ -21,10 +21,7 @@ Handle<Value> Add(const Arguments& args) {
 }
 
 void InitAll(Handle<Object> exports, Handle<Object> module) {
-  //MyObject::Init(exports);
   MyObject::Init();
-  //module->Set(String::NewSymbol("exports"),
-  //    FunctionTemplate::New(CreateObject)->GetFunction());
   exports->Set(String::NewSymbol("createObject"),
       FunctionTemplate::New(CreateObject)->GetFunction());
   exports->Set(String::NewSymbol("add"),

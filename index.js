@@ -1,12 +1,17 @@
-var hello = require('./hello')
-  , addon = require('./addon')
-  , factory = require('./factory')
-  , funfac = require('./funfac')
-  , objfac = require('./objfac')
+var hello     = require('./hello')
+  , addon     = require('./addon')
+  , callbacks = require('./callbacks')
+  , factory   = require('./factory')
+  , funfac    = require('./funfac')
+  , objfac    = require('./objfac')
   ;
 
 console.log(hello.hello());
 console.log(addon.add(1,2));
+
+callbacks(function(msg) {
+  console.log(msg);
+});
 
 var obj1 = factory('hello');
 var obj2 = factory('world');

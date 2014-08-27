@@ -1,0 +1,19 @@
+{
+    "undef" : true
+  , "esnext" : true
+  , "laxcomma": true
+  , "globals" : {
+        "global" : false
+      , "process" : false
+      , "console" : false
+      , "Buffer" : false
+      , "require" : false
+      , "__filename": false
+      , "__dirname": false
+      , "module" : false
+      , "exports" : false
+      , "setTimeout" : false
+      , "setInterval" : false
+      , "clearInterval" : false
+    }
+}

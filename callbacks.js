@@ -1,4 +1,1 @@
-var callbacks = require('./build/Release/callbacks');
-callbacks(function(ms) {
-  console.log(msg);
-});
+module.exports = require('./build/Release/callbacks');
