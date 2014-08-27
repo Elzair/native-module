@@ -1,0 +1,25 @@
+{
+  "name": "native-module",
+  "version": "0.11.3",
+  "description": "Examples for writing native Node.js modules",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "install": "node-gyp rebuild"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/Elzair/native-module.git"
+  },
+  "keywords": [
+    "gyp",
+    "native-module"
+  ],
+  "author": "Philip Woods",
+  "license": "MIT",
+  "gypfile": true,
+  "bugs": {
+    "url": "https://github.com/Elzair/native-module/issues"
+  },
+  "homepage": "https://github.com/Elzair/native-module"
+}
