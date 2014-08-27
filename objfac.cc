@@ -3,29 +3,31 @@
 
 using namespace v8;
 
-Handle<Value> CreateObject(const Arguments& args) {
-  HandleScope scope;
-  return scope.Close(MyObject::NewInstance(args));
+void CreateObject(const FunctionCallbackInfo<Value>& args) {
+  Isolate* isolate = Isolate::GetCurrent();
+  HandleScope scope(isolate);
+  MyObject::NewInstance(args);
 }
 
-Handle<Value> Add(const Arguments& args) {
-  HandleScope scope;
+void Add(const FunctionCallbackInfo<Value>& args) {
+  Isolate* isolate = Isolate::GetCurrent();
+  HandleScope scope(isolate);
+ 
 
   MyObject *obj1 = node::ObjectWrap::Unwrap<MyObject>(
       args[0]->ToObject());
   MyObject *obj2 = node::ObjectWrap::Unwrap<MyObject>(
       args[1]->ToObject());
 
-  double sum = obj1->Val() + obj2->Val();
-  return scope.Close(Number::New(sum));
+  double sum = obj1->value() + obj2->value();
+  args.GetReturnValue().Set(Number::New(isolate, sum));
 }
 
-void InitAll(Handle<Object> exports, Handle<Object> module) {
+void InitAll(Handle<Object> exports) {
   MyObject::Init();
-  exports->Set(String::NewSymbol("createObject"),
-      FunctionTemplate::New(CreateObject)->GetFunction());
-  exports->Set(String::NewSymbol("add"),
-      FunctionTemplate::New(Add)->GetFunction());
+
+  NODE_SET_METHOD(exports, "createObject", CreateObject);
+  NODE_SET_METHOD(exports, "add", Add);
 }
 
 NODE_MODULE(objfac, InitAll)

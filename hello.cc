@@ -1,16 +1,15 @@
 #include <node.h>
-#include <v8.h>
 
 using namespace v8;
 
-Handle<Value> Method(const Arguments &args) {
-  HandleScope scope;
-  return scope.Close(String::New("world"));
+void Method(const FunctionCallbackInfo<Value>& args) {
+  Isolate* isolate = Isolate::GetCurrent();
+  HandleScope scope(isolate);
+  args.GetReturnValue().Set(String::NewFromUtf8(isolate, "world"));
 }
 
 void init(Handle<Object> exports) {
-  exports->Set(String::NewSymbol("hello"),
-      FunctionTemplate::New(Method)->GetFunction());
+  NODE_SET_METHOD(exports, "hello", Method);
 }
 
 NODE_MODULE(hello, init)

@@ -2,24 +2,25 @@
 
 using namespace v8;
 
-Handle<Value> MyFunction(const Arguments& args) {
-  HandleScope scope;
-  return scope.Close(String::New("hello world"));
+void MyFunction(const FunctionCallbackInfo<Value>& args) {
+  Isolate* isolate = Isolate::GetCurrent();
+  HandleScope scope(isolate);
+  args.GetReturnValue().Set(String::NewFromUtf8(isolate, "hello funfac"));
 }
 
-Handle<Value> CreateFunction(const Arguments& args) {
-  HandleScope scope;
+void CreateFunction(const FunctionCallbackInfo<Value>& args) {
+  Isolate* isolate = Isolate::GetCurrent();
+  HandleScope scope(isolate);
 
-  Local<FunctionTemplate> tpl = FunctionTemplate::New(MyFunction);
+  Local<FunctionTemplate> tpl = FunctionTemplate::New(isolate, MyFunction);
   Local<Function> fn = tpl->GetFunction();
-  fn->SetName(String::NewSymbol("theFunction"));
+  fn->SetName(String::NewFromUtf8(isolate, "theFunction")); // omit this to make anonymous
 
-  return scope.Close(fn);
+  args.GetReturnValue().Set(fn);
 }
 
 void Init(Handle<Object> exports, Handle<Object> module) {
-  module->Set(String::NewSymbol("exports"),
-      FunctionTemplate::New(CreateFunction)->GetFunction());
+  NODE_SET_METHOD(module, "exports", CreateFunction);
 }
 
 NODE_MODULE(funfac, Init)

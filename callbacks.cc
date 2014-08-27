@@ -2,20 +2,18 @@
 
 using namespace v8;
 
-Handle<Value> RunCallback(const Arguments& args) {
-  HandleScope scope;
+void RunCallback(const FunctionCallbackInfo<Value>& args) {
+  Isolate* isolate = Isolate::GetCurrent();
+  HandleScope scope(isolate);
 
   Local<Function> cb = Local<Function>::Cast(args[0]);
   const unsigned argc = 1;
-  Local<Value> argv[argc] = { Local<Value>::New(String::New("hello world")) };
-  cb->Call(Context::GetCurrent()->Global(), argc, argv);
-
-  return scope.Close(Undefined());
+  Local<Value> argv[argc] = { String::NewFromUtf8(isolate, "hello world callback") };
+  cb->Call(isolate->GetCurrentContext()->Global(), argc, argv);
 }
 
 void Init(Handle<Object> exports, Handle<Object> module) {
-  module->Set(String::NewSymbol("exports"),
-      FunctionTemplate::New(RunCallback)->GetFunction());
+  NODE_SET_METHOD(module, "exports", RunCallback);
 }
 
 NODE_MODULE(callbacks, Init);

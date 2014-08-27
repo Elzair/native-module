@@ -2,18 +2,18 @@
 
 using namespace v8;
 
-Handle<Value> CreateObject(const Arguments& args) {
-  HandleScope scope;
+void CreateObject(const FunctionCallbackInfo<Value>& args) {
+  Isolate* isolate = Isolate::GetCurrent();
+  HandleScope scope(isolate);
 
-  Local<Object> obj = Object::New();
-  obj->Set(String::NewSymbol("msg"), args[0]->ToString());
+  Local<Object> obj = Object::New(isolate);
+  obj->Set(String::NewFromUtf8(isolate, "msg"), args[0]->ToString());
 
-  return scope.Close(obj);
+  args.GetReturnValue().Set(obj);
 }
 
 void Init(Handle<Object> exports, Handle<Object> module) {
-  module->Set(String::NewSymbol("exports"),
-      FunctionTemplate::New(CreateObject)->GetFunction());
+  NODE_SET_METHOD(module, "exports", CreateObject);
 }
 
 NODE_MODULE(factory, Init);

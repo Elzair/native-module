@@ -7,7 +7,7 @@ var hello     = require('./hello')
   ;
 
 console.log(hello.hello());
-console.log(addon.add(1,2));
+console.log('This should be eight: ' + addon.add(3,5));
 
 callbacks(function(msg) {
   console.log(msg);
@@ -15,30 +15,14 @@ callbacks(function(msg) {
 
 var obj1 = factory('hello');
 var obj2 = factory('world');
-console.log(obj1.msg + ' '+obj2.msg);
+var obj3 = factory('factory');
+console.log(obj1.msg + ' ' + obj2.msg + ' ' + obj3.msg);
 
 var fn = funfac();
 console.log(fn());
 
-// Test Object Factory #1
-//var obj = new objfac.MyObject(10);
-//console.log(obj.plusOne());
-//console.log(obj.plusOne());
-//console.log(obj.plusOne());
-
-// Test Object Factory #2
-//var obja = objfac(10);
-//console.log(obja.plusOne());
-//console.log(obja.plusOne());
-//console.log(obja.plusOne());
-//
-//var objb = objfac(20);
-//console.log(objb.plusOne());
-//console.log(objb.plusOne());
-//console.log(objb.plusOne());
-
-// Test Object Factory #3
+// Test Object Factory 
 var obja = objfac.createObject(10);
 var objb = objfac.createObject(20);
 var result = objfac.add(obja, objb);
-console.log(result);
+console.log('Object Factory Result: ' + result);
